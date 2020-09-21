@@ -7,9 +7,9 @@ use Livewire\Component;
 
 class Posts extends Component
 {
-    public $posts, $title, $body, $post_id;
+    public $posts, $title, $body, $post_id,$query;
     public $isOpen = 0;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +17,11 @@ class Posts extends Component
      */
     public function render()
     {
-        $this->posts = Post::all();
+        $data=Post::Where('title', 'like', '%' . $this->query . '%')->get();
+        $this->posts=$data;
+
+        // $this->posts = Post::all();
+
         return view('livewire.posts');
     }
 
@@ -110,6 +114,15 @@ class Posts extends Component
     {
         Post::find($id)->delete();
         session()->flash('message', 'Post Deleted Successfully.');
+    }
+    public function search(){
+        $data=Post::Where('title', 'like', '%' . $this->query . '%')->get();
+        $this->posts=$data;
+    }
+    public function get_posts(){
+        $data=Post::all();
+
+        return $data;
     }
 
 }

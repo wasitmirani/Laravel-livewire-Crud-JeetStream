@@ -19,6 +19,9 @@
             @if($isOpen)
                 @include('livewire.create')
             @endif
+            <div class="lg:px-8">
+                <input @change="search" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Enter Title" wire:model="query">
+            </div>
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
